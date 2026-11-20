@@ -13,7 +13,6 @@ import { ProductCard } from '../components/ui/ProductCard';
 import { QuickAddModal } from '../components/ui/QuickAddModal';
 import { Button } from '../components/ui/Button';
 import { Magnetic } from '../components/cursor/Magnetic';
-import { HandControlled3DViewer } from '../components/ui/HandControlled3DViewer';
 import { useCart } from '../store/cart';
 import { useToast } from '../store/toast';
 import NotFound from './NotFound';
@@ -36,7 +35,6 @@ export default function Product(): React.ReactElement {
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [quickAddProduct, setQuickAddProduct] = useState<typeof product | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
-  const [viewMode, setViewMode] = useState<'photo' | '3d'>('photo');
 
   const mainAddBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -174,56 +172,19 @@ export default function Product(): React.ReactElement {
 
       {/* Main product showcase: 1 col on mobile, 2 cols at 1024px+ */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
-        {/* Left: Product Showcase (Real Photo by default, with 3D Toggle) */}
+        {/* Left: Product Showcase */}
         <div className="lg:col-span-7">
           <div className="lg:sticky lg:top-[90px] w-full bg-surface rounded-card border border-line shadow-soft p-4 md:p-6">
-            {/* View Mode Switcher */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="label-caps text-xs text-muted">
-                {viewMode === 'photo' ? 'Studio Photography' : 'Interactive 3D'}
-              </span>
-              <div className="inline-flex rounded-btn border border-line bg-bg p-1">
-                <button
-                  type="button"
-                  onClick={() => setViewMode('photo')}
-                  className={`px-3 py-1 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
-                    viewMode === 'photo'
-                      ? 'bg-ink text-surface shadow-xs'
-                      : 'text-muted hover:text-ink'
-                  }`}
-                >
-                  Photo View
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode('3d')}
-                  className={`px-3 py-1 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
-                    viewMode === '3d'
-                      ? 'bg-ink text-surface shadow-xs'
-                      : 'text-muted hover:text-ink'
-                  }`}
-                >
-                  3D View
-                </button>
+            <div className="relative aspect-square w-full rounded-card overflow-hidden bg-bg/40 flex items-center justify-center group">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute bottom-4 left-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-semibold text-ink shadow-xs">
+                {product.name}
               </div>
             </div>
-
-            {viewMode === 'photo' ? (
-              <div className="relative aspect-square w-full rounded-card overflow-hidden bg-bg/40 flex items-center justify-center">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover object-center transition-all duration-300"
-                />
-              </div>
-            ) : (
-              <HandControlled3DViewer
-                framesDir={product.framesDir}
-                name={product.name}
-                aspect="aspect-square"
-                dark={false}
-              />
-            )}
           </div>
         </div>
 

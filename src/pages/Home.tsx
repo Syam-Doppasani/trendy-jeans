@@ -31,7 +31,6 @@ import { QuickAddModal } from '../components/ui/QuickAddModal';
 import { Accordion } from '../components/ui/Accordion';
 import { Swatch } from '../components/ui/Swatch';
 import { Chip } from '../components/ui/Chip';
-import { HandControlled3DViewer } from '../components/ui/HandControlled3DViewer';
 import { useToast } from '../store/toast';
 import { Magnetic } from '../components/cursor/Magnetic';
 import { SectionReveal } from '../components/ui/SectionReveal';
@@ -39,8 +38,6 @@ import { SectionReveal } from '../components/ui/SectionReveal';
 export default function Home(): React.ReactElement {
   const { showToast } = useToast();
   const [quickAddProduct, setQuickAddProduct] = useState<Product | null>(null);
-  const [heroMode, setHeroMode] = useState<'photo' | '3d'>('photo');
-  const [lookbookMode, setLookbookMode] = useState<'photo' | '3d'>('photo');
 
   // New arrivals (tagged 'new')
   const newArrivals = PRODUCTS.filter((p) => p.tags.includes('new'));
@@ -204,67 +201,27 @@ export default function Home(): React.ReactElement {
             </div>
           </div>
 
-          {/* Right Column: Hero Real Image Showcase with 3D Toggle (5 cols) */}
+          {/* Right Column: Hero Studio Photography Showcase (5 cols) */}
           <div className="lg:col-span-5 w-full flex flex-col items-center justify-center">
             <div className="relative w-full max-w-md lg:max-w-none aspect-[4/5] rounded-[24px] overflow-hidden shadow-2xl border border-white/15 group bg-white/5 backdrop-blur-sm">
-              {heroMode === 'photo' ? (
-                <>
-                  <img
-                    src="/images/products/hero-denim-showcase.jpg"
-                    alt="Trendy Jeans Premium Denim Studio Showcase"
-                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A]/90 via-transparent to-transparent pointer-events-none" />
+              <img
+                src="/images/products/hero-denim-showcase.jpg"
+                alt="Trendy Jeans Premium Denim Studio Showcase"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A]/90 via-transparent to-transparent pointer-events-none" />
 
-                  {/* Floating spec tags */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                    <div className="bg-surface/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-ink text-xs font-semibold shadow-soft flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-gold"></span>
-                      <span>Indigo Slim Fit · ₹1,799</span>
-                    </div>
-                    <div className="bg-gold/90 backdrop-blur-md px-3 py-1.5 rounded-full text-ink text-[11px] font-bold uppercase tracking-wider shadow-soft">
-                      100% Cotton Denim
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <HandControlled3DViewer
-                  framesDir="/images/products/3d/frames/hero-denim-showcase"
-                  name="Indigo Slim Fit Jeans"
-                  aspect="aspect-[4/5]"
-                  dark={true}
-                />
-              )}
+              {/* Floating spec tags */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                <div className="bg-surface/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-ink text-xs font-semibold shadow-soft flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-gold"></span>
+                  <span>Indigo Slim Fit · ₹1,799</span>
+                </div>
+                <div className="bg-gold/90 backdrop-blur-md px-3 py-1.5 rounded-full text-ink text-[11px] font-bold uppercase tracking-wider shadow-soft">
+                  100% Cotton Denim
+                </div>
+              </div>
             </div>
-
-            {/* Toggle button: Studio Photo vs Interactive 3D */}
-            <div className="mt-4 inline-flex items-center rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-md">
-              <button
-                type="button"
-                onClick={() => setHeroMode('photo')}
-                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
-                  heroMode === 'photo'
-                    ? 'bg-white text-ink shadow-sm'
-                    : 'text-white/70 hover:text-white'
-                }`}
-              >
-                Studio Photo
-              </button>
-              <button
-                type="button"
-                onClick={() => setHeroMode('3d')}
-                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
-                  heroMode === '3d'
-                    ? 'bg-white text-ink shadow-sm'
-                    : 'text-white/70 hover:text-white'
-                }`}
-              >
-                Interactive 3D
-              </button>
-            </div>
-            {heroMode === '3d' && (
-              <span className="text-[11px] text-white/50 mt-1.5">360° continuous turntable loop</span>
-            )}
           </div>
         </div>
       </section>
@@ -366,66 +323,30 @@ export default function Home(): React.ReactElement {
         </section>
       </SectionReveal>
 
-      {/* 5. 3D TRY-VIEW (Lookbook anchor id="lookbook") */}
+      {/* 5. STYLE LOOKBOOK (Lookbook anchor id="lookbook") */}
       <SectionReveal>
         <section id="lookbook" className="py-20 md:py-28 page-container scroll-mt-20">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="label-caps text-gold block mb-2">INTERACTIVE ATELIER</span>
-            <h2 className="text-3xl md:text-4xl font-heading">See it from every angle</h2>
+            <span className="label-caps text-gold block mb-2">CURATED LOOKBOOK</span>
+            <h2 className="text-3xl md:text-4xl font-heading">See it in detail</h2>
             <p className="text-sm text-muted mt-2">
-              Inspect garments with full 360° precision or view high-resolution studio photography.
+              Explore premium fabrics, tailored fits, and signature colorways from our local collection.
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto flex flex-col items-center">
-            {/* View Mode Toggle */}
-            <div className="mb-6 inline-flex rounded-full border border-line bg-surface p-1 shadow-xs">
-              <button
-                type="button"
-                onClick={() => setLookbookMode('photo')}
-                className={`px-5 py-2 text-xs font-semibold rounded-full transition-all cursor-pointer ${
-                  lookbookMode === 'photo'
-                    ? 'bg-ink text-surface shadow-xs'
-                    : 'text-muted hover:text-ink'
-                }`}
-              >
-                Studio Photo
-              </button>
-              <button
-                type="button"
-                onClick={() => setLookbookMode('3d')}
-                className={`px-5 py-2 text-xs font-semibold rounded-full transition-all cursor-pointer ${
-                  lookbookMode === '3d'
-                    ? 'bg-ink text-surface shadow-xs'
-                    : 'text-muted hover:text-ink'
-                }`}
-              >
-                Interactive 3D
-              </button>
-            </div>
-
-            {/* Large interactive viewer or Real Product Image */}
+            {/* Product Image Showcase */}
             <div className="w-full bg-surface rounded-card border border-line shadow-soft p-4 md:p-6 mb-6">
-              {lookbookMode === 'photo' ? (
-                <div className="relative aspect-square md:aspect-[4/3] w-full rounded-card overflow-hidden bg-bg/40 flex items-center justify-center">
-                  <img
-                    src={selectedTryProduct.image}
-                    alt={selectedTryProduct.name}
-                    className="w-full h-full object-cover object-center transition-all duration-300"
-                  />
-                  <div className="absolute bottom-4 right-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-medium text-ink shadow-xs">
-                    {selectedTryProduct.name}
-                  </div>
-                </div>
-              ) : (
-                <HandControlled3DViewer
-                  key={selectedTryProduct.id}
-                  framesDir={selectedTryProduct.framesDir}
-                  name={selectedTryProduct.name}
-                  aspect="aspect-square md:aspect-[4/3]"
-                  dark={false}
+              <div className="relative aspect-square md:aspect-[4/3] w-full rounded-card overflow-hidden bg-bg/40 flex items-center justify-center">
+                <img
+                  src={selectedTryProduct.image}
+                  alt={selectedTryProduct.name}
+                  className="w-full h-full object-cover object-center transition-all duration-300"
                 />
-              )}
+                <div className="absolute bottom-4 right-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-medium text-ink shadow-xs">
+                  {selectedTryProduct.name}
+                </div>
+              </div>
             </div>
 
             {/* Horizontally scrollable product chips */}
@@ -586,7 +507,7 @@ export default function Home(): React.ReactElement {
                 A storefront that feels like the real thing.
               </h2>
               <p className="text-white/75 text-sm md:text-base leading-relaxed">
-                This website was designed and engineered by Whitesea Labs: interactive 3D, fast mobile-first commerce, and ordering that works the way local shops actually sell.
+                This website was designed and engineered by Whitesea Labs: modern digital craftsmanship, fast mobile-first commerce, and ordering that works the way local shops actually sell.
               </p>
             </div>
 

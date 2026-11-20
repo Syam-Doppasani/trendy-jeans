@@ -108,7 +108,7 @@ export function Footer(): React.ReactElement {
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-white/80">
               <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              3D experience by {WHITESEA_NAME}
+              Digital experience by {WHITESEA_NAME}
             </span>
             <span>Designed & developed by </span>
             <a

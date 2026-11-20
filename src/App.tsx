@@ -6,7 +6,6 @@ import { BottomNav } from './components/layout/BottomNav';
 import { Footer } from './components/layout/Footer';
 import { CartDrawer } from './components/layout/CartDrawer';
 import { Toast } from './components/ui/Toast';
-import { SceneCanvas } from './components/three/SceneCanvas';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -30,7 +29,6 @@ export function App(): React.ReactElement {
     <BrowserRouter>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-bg text-ink relative">
-        <SceneCanvas />
         <AnnouncementBar />
         <Header />
         
