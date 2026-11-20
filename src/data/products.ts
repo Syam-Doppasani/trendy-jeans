@@ -14,6 +14,7 @@ export interface Product {
   price: number;
   mrp: number;
   image: string;
+  animation3d: string;
   colors: ProductColor[];
   sizes: string[];
   outOfStock: string[];
@@ -39,6 +40,7 @@ export const PRODUCTS: Product[] = [
     price: 1799,
     mrp: 2499,
     image: '/images/products/indigo-slim-fit-jeans.jpg',
+    animation3d: '/images/products/3d/indigo-slim-fit-jeans-3d.webp',
     colors: [
       { name: 'Indigo', hex: '#2B3F66' },
       { name: 'Black', hex: '#1A1A1A' },
@@ -63,6 +65,7 @@ export const PRODUCTS: Product[] = [
     price: 1599,
     mrp: 2199,
     image: '/images/products/classic-straight-fit-jeans.jpg',
+    animation3d: '/images/products/3d/classic-straight-fit-jeans-3d.webp',
     colors: [
       { name: 'Mid Blue', hex: '#3E5C8A' },
       { name: 'Dark Navy', hex: '#14213D' },
@@ -86,6 +89,7 @@ export const PRODUCTS: Product[] = [
     price: 1999,
     mrp: 2799,
     image: '/images/products/relaxed-baggy-jeans.jpg',
+    animation3d: '/images/products/3d/relaxed-baggy-jeans-3d.webp',
     colors: [
       { name: 'Stone Wash', hex: '#A9B8CC' },
       { name: 'Charcoal', hex: '#3A3D42' },
@@ -110,6 +114,7 @@ export const PRODUCTS: Product[] = [
     price: 1899,
     mrp: 2599,
     image: '/images/products/ripped-skinny-jeans.jpg',
+    animation3d: '/images/products/3d/ripped-skinny-jeans-3d.webp',
     colors: [
       { name: 'Washed Black', hex: '#2A2A2E' },
       { name: 'Ice Blue', hex: '#B9CBE0' },
@@ -133,6 +138,7 @@ export const PRODUCTS: Product[] = [
     price: 599,
     mrp: 899,
     image: '/images/products/essential-cotton-tee.jpg',
+    animation3d: '/images/products/3d/essential-cotton-tee-3d.webp',
     colors: [
       { name: 'White', hex: '#F4F4F2' },
       { name: 'Black', hex: '#151515' },
@@ -158,6 +164,7 @@ export const PRODUCTS: Product[] = [
     price: 799,
     mrp: 1199,
     image: '/images/products/oversized-drop-shoulder-tee.jpg',
+    animation3d: '/images/products/3d/oversized-drop-shoulder-tee-3d.webp',
     colors: [
       { name: 'Charcoal', hex: '#3A3D42' },
       { name: 'Cream', hex: '#EFE7D6' },
@@ -182,6 +189,7 @@ export const PRODUCTS: Product[] = [
     price: 899,
     mrp: 1299,
     image: '/images/products/graphic-street-tee.jpg',
+    animation3d: '/images/products/3d/graphic-street-tee-3d.webp',
     colors: [
       { name: 'Black', hex: '#151515' },
       { name: 'White', hex: '#F4F4F2' },
@@ -205,6 +213,7 @@ export const PRODUCTS: Product[] = [
     price: 1399,
     mrp: 1999,
     image: '/images/products/linen-casual-shirt.jpg',
+    animation3d: '/images/products/3d/linen-casual-shirt-3d.webp',
     colors: [
       { name: 'Beige', hex: '#CBB994' },
       { name: 'White', hex: '#F4F4F2' },
@@ -229,6 +238,7 @@ export const PRODUCTS: Product[] = [
     price: 1499,
     mrp: 2099,
     image: '/images/products/oxford-check-shirt.jpg',
+    animation3d: '/images/products/3d/oxford-check-shirt-3d.webp',
     colors: [
       { name: 'Blue Check', hex: '#5F7FB0' },
       { name: 'Red Check', hex: '#A64B4B' },
@@ -252,6 +262,7 @@ export const PRODUCTS: Product[] = [
     price: 1699,
     mrp: 2399,
     image: '/images/products/heavy-fleece-hoodie.jpg',
+    animation3d: '/images/products/3d/heavy-fleece-hoodie-3d.webp',
     colors: [
       { name: 'Black', hex: '#151515' },
       { name: 'Heather Grey', hex: '#9A9A9A' },
@@ -276,6 +287,7 @@ export const PRODUCTS: Product[] = [
     price: 1799,
     mrp: 2499,
     image: '/images/products/zip-up-hoodie.jpg',
+    animation3d: '/images/products/3d/zip-up-hoodie-3d.webp',
     colors: [
       { name: 'Maroon', hex: '#6B1F2A' },
       { name: 'Black', hex: '#151515' },
@@ -299,6 +311,7 @@ export const PRODUCTS: Product[] = [
     price: 2799,
     mrp: 3799,
     image: '/images/products/denim-trucker-jacket.jpg',
+    animation3d: '/images/products/3d/denim-trucker-jacket-3d.webp',
     colors: [
       { name: 'Indigo', hex: '#2B3F66' },
       { name: 'Black', hex: '#1A1A1A' },

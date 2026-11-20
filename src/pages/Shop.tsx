@@ -23,11 +23,12 @@ export default function Shop(): React.ReactElement {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState<number>(3000);
 
-  // Update document title
+  // Update document title and reset scroll position to top
   useEffect(() => {
     document.title = activeCategory === 'All' 
       ? 'Shop All Styles — Trendy Jeans' 
       : `${activeCategory} — Trendy Jeans`;
+    window.scrollTo(0, 0);
   }, [activeCategory]);
 
   const handleCategoryChange = (cat: string) => {
@@ -38,6 +39,7 @@ export default function Shop(): React.ReactElement {
       newParams.set('category', cat);
     }
     setSearchParams(newParams);
+    window.scrollTo(0, 0);
   };
 
   const handleSortChange = (sort: string) => {

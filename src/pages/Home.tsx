@@ -27,8 +27,6 @@ import {
   WHATSAPP_NUMBER,
   WHITESEA_URL,
 } from '../config/shop';
-import { HeroScene } from '../components/three/HeroScene';
-import { GarmentView } from '../components/three/GarmentView';
 import { ProductCard } from '../components/ui/ProductCard';
 import { QuickAddModal } from '../components/ui/QuickAddModal';
 import { Accordion } from '../components/ui/Accordion';
@@ -230,7 +228,27 @@ export default function Home(): React.ReactElement {
                   </div>
                 </>
               ) : (
-                <HeroScene />
+                <div className="relative w-full h-full flex items-center justify-center bg-[#080D1A]">
+                  <img
+                    src="/images/products/3d/hero-denim-showcase-3d.webp"
+                    alt="Indigo Slim Fit Jeans 3D Turntable Animation"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A]/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute top-4 right-4 bg-ink/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-gold text-xs font-semibold border border-gold/30 flex items-center gap-2 shadow-soft">
+                    <RotateCcw className="w-3.5 h-3.5 text-gold animate-spin" />
+                    <span>3D Turntable Active</span>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                    <div className="bg-surface/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-ink text-xs font-semibold shadow-soft flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-gold"></span>
+                      <span>360° Rotating Model</span>
+                    </div>
+                    <div className="bg-gold/90 backdrop-blur-md px-3 py-1.5 rounded-full text-ink text-[11px] font-bold uppercase tracking-wider shadow-soft">
+                      100% Cotton Denim
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -260,7 +278,7 @@ export default function Home(): React.ReactElement {
               </button>
             </div>
             {heroMode === '3d' && (
-              <span className="text-[11px] text-white/50 mt-1.5">Drag to rotate garment</span>
+              <span className="text-[11px] text-white/50 mt-1.5">360° continuous turntable loop</span>
             )}
           </div>
         </div>
@@ -415,19 +433,18 @@ export default function Home(): React.ReactElement {
                   </div>
                 </div>
               ) : (
-                <div className="relative">
-                  <GarmentView
-                    type={selectedTryProduct.garment}
-                    colorHex={selectedTryColor.hex}
-                    fit={selectedTryProduct.fit}
-                    productId={selectedTryProduct.id}
-                    name={selectedTryProduct.name}
-                    mode="viewer"
-                    aspect="aspect-square md:aspect-[4/3]"
+                <div className="relative aspect-square md:aspect-[4/3] w-full rounded-card overflow-hidden bg-[#0B1220]/5 flex items-center justify-center">
+                  <img
+                    src={selectedTryProduct.animation3d}
+                    alt={`${selectedTryProduct.name} 3D Animation`}
+                    className="w-full h-full object-cover object-center transition-all duration-300"
                   />
-                  <div className="absolute top-3 right-3 bg-surface/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-ink border border-line shadow-xs flex items-center gap-1.5">
-                    <RotateCcw className="w-3 h-3 text-gold" />
-                    <span>360° Drag & Zoom</span>
+                  <div className="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-semibold text-ink border border-line shadow-xs flex items-center gap-1.5">
+                    <RotateCcw className="w-3.5 h-3.5 text-gold animate-spin" />
+                    <span>360° 3D Animation</span>
+                  </div>
+                  <div className="absolute bottom-4 left-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-medium text-ink shadow-xs">
+                    {selectedTryProduct.name}
                   </div>
                 </div>
               )}

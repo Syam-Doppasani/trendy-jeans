@@ -7,6 +7,7 @@ import { Footer } from './components/layout/Footer';
 import { CartDrawer } from './components/layout/CartDrawer';
 import { Toast } from './components/ui/Toast';
 import { SceneCanvas } from './components/three/SceneCanvas';
+import { ScrollToTop } from './components/layout/ScrollToTop';
 
 const Home = lazy(() => import('./pages/Home'));
 const Shop = lazy(() => import('./pages/Shop'));
@@ -27,6 +28,7 @@ function PageFallback(): React.ReactElement {
 export function App(): React.ReactElement {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-bg text-ink relative">
         <SceneCanvas />
         <AnnouncementBar />

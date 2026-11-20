@@ -5,7 +5,6 @@ import { PRODUCTS } from '../data/products';
 import { SIZE_GUIDE_DATA } from '../data/content';
 import { SHOP_NAME } from '../config/shop';
 import { formatPrice, buildWhatsAppProductUrl } from '../lib/format';
-import { GarmentView } from '../components/three/GarmentView';
 import { Swatch } from '../components/ui/Swatch';
 import { SizeSelector } from '../components/ui/SizeSelector';
 import { QtyStepper } from '../components/ui/QtyStepper';
@@ -217,15 +216,17 @@ export default function Product(): React.ReactElement {
                 />
               </div>
             ) : (
-              <GarmentView
-                type={product.garment}
-                colorHex={selectedColor.hex}
-                fit={product.fit}
-                productId={product.id}
-                name={product.name}
-                mode="viewer"
-                aspect="aspect-square"
-              />
+              <div className="relative aspect-square w-full rounded-card overflow-hidden bg-[#0B1220]/5 flex items-center justify-center">
+                <img
+                  src={product.animation3d}
+                  alt={`${product.name} 3D Animation`}
+                  className="w-full h-full object-cover object-center transition-all duration-300"
+                />
+                <div className="absolute top-3.5 right-3.5 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-ink border border-line shadow-xs flex items-center gap-1.5">
+                  <RotateCcw className="w-3.5 h-3.5 text-gold animate-spin" />
+                  <span>360° 3D Animation</span>
+                </div>
+              </div>
             )}
           </div>
         </div>
