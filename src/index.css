@@ -9,25 +9,33 @@
 @tailwind utilities;
 
 :root {
-  --bg: #F6F3EE;
+  --bg: #F8F6F1;
   --surface: #FFFFFF;
-  --ink: #111111;
-  --muted: #6B6B6B;
-  --denim: #1F3A5F;
-  --denim-deep: #0B1220;
+  --surface-subtle: #F2EEE5;
+  --ink: #0E1218;
+  --muted: #5E6773;
+  --denim: #1B365D;
+  --denim-deep: #080D1A;
+  --denim-surface: #0E1626;
   --gold: #C8A96A;
-  --line: #E4DFD6;
-  --success: #2E7D4F;
+  --gold-light: #DFC894;
+  --gold-glow: rgba(200, 169, 106, 0.22);
+  --line: #E2DBD0;
+  --line-dark: #1E293B;
+  --success: #20874E;
+  --whatsapp: #25D366;
   --danger: #B3261E;
 }
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--ink);
   background-color: var(--bg);
   overflow-x: hidden;
   max-width: 100vw;
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -38,59 +46,82 @@ body {
   padding: 0;
   background-color: var(--bg);
   font-size: 16px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  color: var(--ink);
 }
 
 /* Typography Headings */
 h1, .font-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
 h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
-/* Uppercase labels */
+/* Uppercase Micro-labels */
 .label-caps {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-/* Button & Card utilities */
+/* Glassmorphism & Surface Utilities */
+.glass-dark {
+  background: rgba(11, 18, 32, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 219, 208, 0.8);
+}
+
+/* Button & Card Utilities */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 52px;
   min-width: 44px;
-  padding: 0 24px;
+  padding: 0 26px;
   background-color: var(--ink);
   color: #FFFFFF;
   border-radius: 999px;
   font-weight: 500;
   font-size: 15px;
-  transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+  letter-spacing: 0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   border: 1px solid transparent;
+  box-shadow: 0 4px 14px rgba(14, 18, 24, 0.12);
+}
+.btn-primary:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(14, 18, 24, 0.18);
 }
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
 }
 .btn-primary:focus-visible {
   outline: 2px solid var(--gold);
@@ -106,18 +137,58 @@ h3 {
   padding: 0 24px;
   background-color: transparent;
   color: var(--ink);
-  border: 1px solid var(--ink);
+  border: 1.5px solid var(--ink);
   border-radius: 999px;
   font-weight: 500;
   font-size: 15px;
-  transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
+.btn-secondary:hover {
+  background-color: rgba(14, 18, 24, 0.06);
+  transform: translateY(-1px);
+}
 .btn-secondary:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
 }
 .btn-secondary:focus-visible {
   outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Dedicated High-Visibility WhatsApp Hero Button */
+.btn-whatsapp-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  min-width: 44px;
+  padding: 0 24px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 15px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-whatsapp-hero:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(37, 211, 102, 0.7);
+  box-shadow: 0 0 24px rgba(37, 211, 102, 0.28), 0 4px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+  color: #FFFFFF !important;
+}
+.btn-whatsapp-hero:active {
+  transform: translateY(0) scale(0.98);
+}
+.btn-whatsapp-hero:focus-visible {
+  outline: 2px solid var(--whatsapp);
   outline-offset: 2px;
 }
 
@@ -136,8 +207,14 @@ h3 {
     padding-right: 32px;
   }
 }
+@media (min-width: 1280px) {
+  .page-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
 
-/* Marquee strip */
+/* Infinite Marquee strip */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -146,7 +223,7 @@ h3 {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 32s linear infinite;
 }
 .animate-marquee:hover {
   animation-play-state: paused;
@@ -167,4 +244,20 @@ h3 {
 /* Safe areas */
 .safe-bottom {
   padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* Custom Scrollbar for sleek e-commerce feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #D3CBC0;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B5AB9D;
 }

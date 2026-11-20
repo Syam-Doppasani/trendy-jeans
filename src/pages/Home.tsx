@@ -15,6 +15,8 @@ import {
   MessageSquare,
   Layers,
   ArrowRight,
+  ShieldCheck,
+  RotateCcw,
 } from 'lucide-react';
 import { PRODUCTS, Product } from '../data/products';
 import { VALUE_PROPS, TESTIMONIALS, FAQS, WHITESEA_SERVICES } from '../data/content';
@@ -108,68 +110,119 @@ export default function Home(): React.ReactElement {
       {/* 1. HERO (dark, min-height 92dvh) */}
       <section
         aria-label="Hero showcase"
-        className="relative min-h-[92dvh] bg-denim-deep text-surface flex items-center overflow-hidden"
+        className="relative min-h-[92dvh] bg-[#080D1A] text-surface flex items-center overflow-hidden"
       >
-        {/* Faint radial glow of denim color */}
+        {/* Subtle radial background glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(circle at 75% 45%, rgba(31, 58, 95, 0.55) 0%, rgba(11, 18, 32, 0.95) 70%)',
+              'radial-gradient(ellipse at 70% 40%, rgba(31, 58, 95, 0.45) 0%, rgba(8, 13, 26, 0.95) 75%)',
           }}
         />
 
-        <div className="page-container relative z-10 w-full py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
-          {/* Left Column: Copy & Actions */}
-          <div className="flex flex-col items-start max-w-xl">
-            <span className="label-caps text-gold px-3.5 py-1 rounded-full bg-gold/10 border border-gold/20 mb-6">
-              NEW SEASON 2026
-            </span>
+        {/* Ambient grid texture */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              'radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-6 tracking-tight leading-[1.05]">
-              Denim, redefined.
+        <div className="page-container relative z-10 w-full py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 items-center gap-12">
+          {/* Left Column: Copy & Actions (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col items-start max-w-2xl">
+            {/* Live Store Pill Indicator */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/8 backdrop-blur-md border border-white/15 mb-6 shadow-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="label-caps text-gold text-[11px] font-semibold tracking-wider">
+                NEW SEASON 2026 · STORE OPEN TODAY
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading mb-6 tracking-tight leading-[1.05] text-white">
+              Denim, <span className="font-serif italic font-normal text-gold">redefined.</span>
             </h1>
 
-            <p className="text-white/80 text-base md:text-lg mb-8 leading-relaxed max-w-lg">
+            <p className="text-white/85 text-base md:text-lg mb-8 leading-relaxed max-w-xl font-normal">
               Premium everyday fits from your neighbourhood store. Pick it. Rotate it. Order it in minutes.
             </p>
 
+            {/* CTAs: Primary Shop Button + High-Visibility Emerald WhatsApp Button */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-              <Magnetic strength={0.25} radius={80}>
+              <Magnetic strength={0.2} radius={70}>
                 <Link
                   to="/shop"
-                  className="btn-primary bg-surface text-ink hover:bg-white min-w-[160px] text-center"
+                  className="inline-flex items-center justify-center px-8 h-[52px] rounded-full bg-surface text-ink font-semibold text-sm hover:bg-white hover:shadow-lg transition-all duration-200 min-w-[160px] text-center"
                 >
                   Shop Collection
                 </Link>
               </Magnetic>
+
+              {/* Elevated WhatsApp Button: Crisp frosted glass, vibrant emerald border, bright white text */}
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                  'Hi Trendy Jeans! I would like to order or enquire about your collection.'
+                )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-secondary text-white border-white/60 hover:bg-white/10 min-w-[170px] text-center"
+                className="btn-whatsapp-hero group"
+                aria-label="Order directly on WhatsApp"
               >
-                Order on WhatsApp
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <MessageCircle className="w-5 h-5 text-[#25D366] transition-transform duration-200 group-hover:scale-110" />
+                <span className="text-white font-semibold">Order on WhatsApp</span>
               </a>
+            </div>
+
+            {/* Trust Badges Bar directly beneath CTAs */}
+            <div className="pt-8 border-t border-white/10 mt-8 grid grid-cols-3 gap-6 w-full max-w-lg text-white/70 text-xs">
+              <div className="flex flex-col">
+                <span className="text-gold font-semibold text-sm mb-0.5 flex items-center gap-1">
+                  <Truck className="w-3.5 h-3.5" /> 24–48h
+                </span>
+                <span>Local dispatch</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-gold font-semibold text-sm mb-0.5 flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" /> 7-Day
+                </span>
+                <span>Free size exchange</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-gold font-semibold text-sm mb-0.5 flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5" /> ₹0 Delivery
+                </span>
+                <span>Orders over ₹1,999</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Hero Real Image Showcase */}
-          <div className="w-full min-h-[380px] md:min-h-[500px] lg:min-h-[540px] flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-md lg:max-w-lg aspect-square rounded-[24px] overflow-hidden shadow-2xl border border-white/10 group bg-surface/5">
+          {/* Right Column: Hero Real Image Showcase with 3D Toggle (5 cols) */}
+          <div className="lg:col-span-5 w-full flex flex-col items-center justify-center">
+            <div className="relative w-full max-w-md lg:max-w-none aspect-[4/5] rounded-[24px] overflow-hidden shadow-2xl border border-white/15 group bg-white/5 backdrop-blur-sm">
               {heroMode === 'photo' ? (
                 <>
                   <img
                     src="/images/products/hero-denim-showcase.jpg"
-                    alt="Trendy Jeans Premium Denim"
+                    alt="Trendy Jeans Premium Denim Studio Showcase"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-denim-deep/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A]/90 via-transparent to-transparent pointer-events-none" />
 
                   {/* Floating spec tags */}
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                    <div className="bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-ink text-xs font-semibold shadow-soft">
-                      Indigo Slim Fit · ₹1,799
+                    <div className="bg-surface/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-ink text-xs font-semibold shadow-soft flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-gold"></span>
+                      <span>Indigo Slim Fit · ₹1,799</span>
                     </div>
                     <div className="bg-gold/90 backdrop-blur-md px-3 py-1.5 rounded-full text-ink text-[11px] font-bold uppercase tracking-wider shadow-soft">
                       100% Cotton Denim
@@ -181,14 +234,14 @@ export default function Home(): React.ReactElement {
               )}
             </div>
 
-            {/* Toggle button */}
-            <div className="mt-4 inline-flex rounded-btn border border-white/20 bg-white/5 p-1 backdrop-blur-xs">
+            {/* Toggle button: Studio Photo vs Interactive 3D */}
+            <div className="mt-4 inline-flex items-center rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-md">
               <button
                 type="button"
                 onClick={() => setHeroMode('photo')}
-                className={`px-3.5 py-1 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
+                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
                   heroMode === 'photo'
-                    ? 'bg-white text-ink shadow-xs'
+                    ? 'bg-white text-ink shadow-sm'
                     : 'text-white/70 hover:text-white'
                 }`}
               >
@@ -197,15 +250,18 @@ export default function Home(): React.ReactElement {
               <button
                 type="button"
                 onClick={() => setHeroMode('3d')}
-                className={`px-3.5 py-1 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
+                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
                   heroMode === '3d'
-                    ? 'bg-white text-ink shadow-xs'
+                    ? 'bg-white text-ink shadow-sm'
                     : 'text-white/70 hover:text-white'
                 }`}
               >
                 Interactive 3D
               </button>
             </div>
+            {heroMode === '3d' && (
+              <span className="text-[11px] text-white/50 mt-1.5">Drag to rotate garment</span>
+            )}
           </div>
         </div>
       </section>
@@ -230,17 +286,17 @@ export default function Home(): React.ReactElement {
       {/* 3. NEW ARRIVALS */}
       <SectionReveal>
         <section className="py-16 md:py-24 page-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
             <div>
               <span className="label-caps text-gold block mb-2">JUST IN</span>
               <h2 className="text-3xl md:text-4xl font-heading">New arrivals</h2>
             </div>
             <Link
               to="/shop"
-              className="text-sm font-semibold text-ink hover:text-gold transition-colors inline-flex items-center gap-1.5"
+              className="text-sm font-semibold text-ink hover:text-gold transition-colors inline-flex items-center gap-1.5 group"
             >
               <span>View all styles</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -260,9 +316,14 @@ export default function Home(): React.ReactElement {
 
       {/* 4. SHOP BY CATEGORY */}
       <SectionReveal>
-        <section className="py-16 bg-surface border-y border-line">
+        <section className="py-20 bg-surface border-y border-line">
           <div className="page-container">
-            <h2 className="text-3xl md:text-4xl font-heading mb-8">Shop by category</h2>
+            <div className="flex items-center justify-between mb-10">
+              <div>
+                <span className="label-caps text-gold block mb-1">CATEGORIES</span>
+                <h2 className="text-3xl md:text-4xl font-heading">Shop by category</h2>
+              </div>
+            </div>
 
             {/* 2x2 grid on mobile, 4 columns at 1024px+ */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -270,19 +331,21 @@ export default function Home(): React.ReactElement {
                 <Link
                   key={cat.name}
                   to={`/shop?category=${encodeURIComponent(cat.name)}`}
-                  className="group relative rounded-card p-6 flex flex-col justify-between min-h-[160px] md:min-h-[200px] overflow-hidden transition-all duration-200 hover:-translate-y-1 shadow-soft"
+                  className="group relative rounded-card p-6 flex flex-col justify-between min-h-[170px] md:min-h-[220px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 shadow-soft border border-white/5"
                   style={{
-                    background: 'linear-gradient(135deg, #1F3A5F 0%, #0B1220 100%)',
+                    background: 'linear-gradient(135deg, #1A2E4C 0%, #080D1A 100%)',
                   }}
                 >
                   <div className="flex items-start justify-between">
                     <svg
                       viewBox="0 0 100 100"
-                      className="w-10 h-10 md:w-12 md:h-12 fill-gold/80 stroke-white/20 stroke-1 group-hover:scale-110 transition-transform"
+                      className="w-10 h-10 md:w-12 md:h-12 fill-gold/80 stroke-white/20 stroke-1 group-hover:scale-110 transition-transform duration-300"
                     >
                       <path d={cat.iconPath} />
                     </svg>
-                    <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-gold transition-colors" />
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gold group-hover:text-ink transition-colors">
+                      <ArrowRight className="w-4 h-4 text-white/70 group-hover:text-ink transition-colors" />
+                    </div>
                   </div>
 
                   <div>
@@ -302,19 +365,22 @@ export default function Home(): React.ReactElement {
 
       {/* 5. 3D TRY-VIEW (Lookbook anchor id="lookbook") */}
       <SectionReveal>
-        <section id="lookbook" className="py-16 md:py-24 page-container scroll-mt-20">
+        <section id="lookbook" className="py-20 md:py-28 page-container scroll-mt-20">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="label-caps text-gold block mb-2">3D EXPERIENCE</span>
+            <span className="label-caps text-gold block mb-2">INTERACTIVE ATELIER</span>
             <h2 className="text-3xl md:text-4xl font-heading">See it from every angle</h2>
+            <p className="text-sm text-muted mt-2">
+              Inspect garments with full 360° precision or view high-resolution studio photography.
+            </p>
           </div>
 
           <div className="max-w-3xl mx-auto flex flex-col items-center">
             {/* View Mode Toggle */}
-            <div className="mb-5 inline-flex rounded-btn border border-line bg-surface p-1 shadow-xs">
+            <div className="mb-6 inline-flex rounded-full border border-line bg-surface p-1 shadow-xs">
               <button
                 type="button"
                 onClick={() => setLookbookMode('photo')}
-                className={`px-4 py-1.5 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
+                className={`px-5 py-2 text-xs font-semibold rounded-full transition-all cursor-pointer ${
                   lookbookMode === 'photo'
                     ? 'bg-ink text-surface shadow-xs'
                     : 'text-muted hover:text-ink'
@@ -325,7 +391,7 @@ export default function Home(): React.ReactElement {
               <button
                 type="button"
                 onClick={() => setLookbookMode('3d')}
-                className={`px-4 py-1.5 text-xs font-semibold rounded-btn transition-colors cursor-pointer ${
+                className={`px-5 py-2 text-xs font-semibold rounded-full transition-all cursor-pointer ${
                   lookbookMode === '3d'
                     ? 'bg-ink text-surface shadow-xs'
                     : 'text-muted hover:text-ink'
@@ -344,17 +410,26 @@ export default function Home(): React.ReactElement {
                     alt={selectedTryProduct.name}
                     className="w-full h-full object-cover object-center transition-all duration-300"
                   />
+                  <div className="absolute bottom-4 right-4 bg-surface/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-medium text-ink shadow-xs">
+                    {selectedTryProduct.name}
+                  </div>
                 </div>
               ) : (
-                <GarmentView
-                  type={selectedTryProduct.garment}
-                  colorHex={selectedTryColor.hex}
-                  fit={selectedTryProduct.fit}
-                  productId={selectedTryProduct.id}
-                  name={selectedTryProduct.name}
-                  mode="viewer"
-                  aspect="aspect-square md:aspect-[4/3]"
-                />
+                <div className="relative">
+                  <GarmentView
+                    type={selectedTryProduct.garment}
+                    colorHex={selectedTryColor.hex}
+                    fit={selectedTryProduct.fit}
+                    productId={selectedTryProduct.id}
+                    name={selectedTryProduct.name}
+                    mode="viewer"
+                    aspect="aspect-square md:aspect-[4/3]"
+                  />
+                  <div className="absolute top-3 right-3 bg-surface/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-ink border border-line shadow-xs flex items-center gap-1.5">
+                    <RotateCcw className="w-3 h-3 text-gold" />
+                    <span>360° Drag & Zoom</span>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -371,7 +446,7 @@ export default function Home(): React.ReactElement {
             </div>
 
             {/* Color swatches for selected product */}
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2.5 mb-6">
               {selectedTryProduct.colors.map((c) => (
                 <Swatch
                   key={c.name}
@@ -386,9 +461,9 @@ export default function Home(): React.ReactElement {
             {/* View details button */}
             <Link
               to={`/product/${selectedTryProduct.slug}`}
-              className="btn-primary min-w-[200px] text-center"
+              className="btn-primary min-w-[220px] text-center"
             >
-              View details
+              View product details
             </Link>
           </div>
         </section>
@@ -396,27 +471,36 @@ export default function Home(): React.ReactElement {
 
       {/* 6. WHY TRENDY JEANS (4 value props: 1 col mobile, 2x2 at 768px+) */}
       <SectionReveal>
-        <section className="py-16 bg-surface border-y border-line">
+        <section className="py-20 bg-surface border-y border-line">
           <div className="page-container">
-            <h2 className="text-3xl md:text-4xl font-heading mb-10 text-center">
-              Why Trendy Jeans
-            </h2>
+            <div className="text-center max-w-xl mx-auto mb-14">
+              <span className="label-caps text-gold block mb-2">THE TRENDY DIFFERENCE</span>
+              <h2 className="text-3xl md:text-4xl font-heading">
+                Why Trendy Jeans
+              </h2>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {VALUE_PROPS.map((vp) => {
+              {VALUE_PROPS.map((vp, index) => {
                 const IconComp = valuePropIcons[vp.icon];
+                const indexPadded = `0${index + 1}`;
                 return (
                   <div
                     key={vp.id}
-                    className="flex items-start gap-4 p-6 rounded-card bg-bg/50 border border-line"
+                    className="flex items-start gap-5 p-7 rounded-card bg-[#FDFCF9] border border-line shadow-xs transition-all duration-200 hover:shadow-soft hover:-translate-y-0.5"
                   >
                     <div className="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center flex-shrink-0">
                       <IconComp className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="font-heading text-lg font-semibold mb-1 text-ink">
-                        {vp.title}
-                      </h3>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="label-caps text-gold text-[10px] font-bold">
+                          {indexPadded}
+                        </span>
+                        <h3 className="font-heading text-lg font-semibold text-ink">
+                          {vp.title}
+                        </h3>
+                      </div>
                       <p className="text-sm text-muted leading-relaxed">{vp.text}</p>
                     </div>
                   </div>
@@ -427,23 +511,24 @@ export default function Home(): React.ReactElement {
         </section>
       </SectionReveal>
 
-      {/* 7. OFFER BANNER (Gold-bordered card) */}
+      {/* 7. OFFER BANNER (Gold-bordered card with voucher styling) */}
       <SectionReveal>
-        <section className="py-12 page-container">
-          <div className="rounded-card border-2 border-gold bg-surface p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-soft">
+        <section className="py-14 page-container">
+          <div className="rounded-card border-2 border-gold/80 bg-surface p-7 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-soft relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-gold/10 rounded-full blur-2xl pointer-events-none" />
             <div>
-              <span className="label-caps text-gold block mb-1">SPECIAL OFFER</span>
+              <span className="label-caps text-gold block mb-1">WELCOME INVITATION</span>
               <h3 className="text-2xl md:text-3xl font-heading font-semibold text-ink">
                 First order? Get ₹150 off
               </h3>
               <p className="text-sm text-muted mt-1">
-                Use code <strong className="text-ink">WELCOME150</strong> on orders above ₹1,499.
+                Use code <strong className="text-ink font-semibold">WELCOME150</strong> on orders above ₹1,499.
               </p>
             </div>
             <button
               type="button"
               onClick={handleCopyOfferCode}
-              className="btn-primary bg-gold text-ink font-semibold hover:brightness-105 min-w-[150px] inline-flex items-center gap-2"
+              className="btn-primary bg-gold text-ink font-semibold hover:brightness-105 min-w-[160px] inline-flex items-center justify-center gap-2"
             >
               <Copy className="w-4 h-4" />
               <span>Copy code</span>
@@ -454,16 +539,19 @@ export default function Home(): React.ReactElement {
 
       {/* 8. TESTIMONIALS (Horizontal scroll-snap mobile, 3 cols 1024px+) */}
       <SectionReveal>
-        <section className="py-16 md:py-24 page-container">
-          <h2 className="text-3xl md:text-4xl font-heading mb-10 text-center">
-            Loved by locals
-          </h2>
+        <section className="py-20 md:py-28 page-container">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <span className="label-caps text-gold block mb-2">NEIGHBOURHOOD REVIEWS</span>
+            <h2 className="text-3xl md:text-4xl font-heading">
+              Loved by locals
+            </h2>
+          </div>
 
           <div className="flex lg:grid lg:grid-cols-3 gap-6 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory pb-4 -mx-4 px-4 lg:mx-0 lg:px-0">
             {TESTIMONIALS.map((t, idx) => (
               <div
                 key={idx}
-                className="w-[82vw] sm:w-[60vw] md:w-[45vw] lg:w-auto flex-shrink-0 snap-start bg-surface rounded-card p-6 border border-line shadow-soft flex flex-col justify-between"
+                className="w-[82vw] sm:w-[60vw] md:w-[45vw] lg:w-auto flex-shrink-0 snap-start bg-surface rounded-card p-7 border border-line shadow-soft flex flex-col justify-between"
               >
                 <div>
                   {/* 5-star rating row */}
@@ -481,7 +569,10 @@ export default function Home(): React.ReactElement {
                     "{t.quote}"
                   </p>
                 </div>
-                <span className="font-semibold text-sm text-ink">{t.name}</span>
+                <div className="pt-4 border-t border-line/60 flex items-center justify-between">
+                  <span className="font-semibold text-sm text-ink">{t.name}</span>
+                  <span className="text-[11px] text-muted">Verified Buyer</span>
+                </div>
               </div>
             ))}
           </div>
@@ -490,9 +581,9 @@ export default function Home(): React.ReactElement {
 
       {/* 9. WHITESEA LABS SHOWCASE (Section 10) */}
       <SectionReveal>
-        <section className="py-20 bg-denim-deep text-surface border-t border-b border-line/10">
-          <div className="page-container">
-            <div className="text-center max-w-2xl mx-auto mb-14">
+        <section className="py-24 bg-[#080D1A] text-surface border-t border-b border-line/10 relative overflow-hidden">
+          <div className="page-container relative z-10">
+            <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="label-caps text-gold px-3.5 py-1 rounded-full bg-gold/10 border border-gold/20 mb-4 inline-block">
                 BUILT BY WHITESEA LABS
               </span>
@@ -505,13 +596,13 @@ export default function Home(): React.ReactElement {
             </div>
 
             {/* 4 service cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
               {WHITESEA_SERVICES.map((s) => {
                 const IconComp = whiteseaIcons[s.icon];
                 return (
                   <div
                     key={s.id}
-                    className="bg-white/5 border border-white/10 rounded-card p-6 flex flex-col justify-between"
+                    className="bg-white/5 border border-white/10 rounded-card p-6 flex flex-col justify-between hover:bg-white/[0.08] transition-colors"
                   >
                     <div className="w-10 h-10 rounded-full bg-gold/15 text-gold flex items-center justify-center mb-4">
                       <IconComp className="w-5 h-5" />
@@ -542,11 +633,14 @@ export default function Home(): React.ReactElement {
 
       {/* 10. VISIT THE STORE */}
       <SectionReveal>
-        <section className="py-16 md:py-20 page-container">
-          <div className="bg-surface rounded-card border border-line p-6 md:p-10 shadow-soft max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-heading mb-6 text-center">Visit the store</h2>
+        <section className="py-20 md:py-24 page-container">
+          <div className="bg-surface rounded-card border border-line p-8 md:p-12 shadow-soft max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="label-caps text-gold block mb-1">LOCAL FLAGSHIP</span>
+              <h2 className="text-2xl md:text-3xl font-heading">Visit the store</h2>
+            </div>
 
-            <div className="space-y-4 text-sm text-ink mb-8">
+            <div className="space-y-4 text-sm text-ink mb-8 max-w-lg mx-auto">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <span>{ADDRESS}</span>
@@ -582,11 +676,14 @@ export default function Home(): React.ReactElement {
 
       {/* 11. FAQ ACCORDION (6 items, one open at a time) */}
       <SectionReveal>
-        <section id="faq" className="py-16 bg-surface border-t border-line scroll-mt-20">
+        <section id="faq" className="py-20 bg-surface border-t border-line scroll-mt-20">
           <div className="page-container max-w-3xl">
-            <h2 className="text-3xl md:text-4xl font-heading mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
+            <div className="text-center mb-10">
+              <span className="label-caps text-gold block mb-1">HELP & GUIDANCE</span>
+              <h2 className="text-3xl md:text-4xl font-heading">
+                Frequently Asked Questions
+              </h2>
+            </div>
             <Accordion
               items={FAQS.map((faq) => ({
                 id: faq.id,

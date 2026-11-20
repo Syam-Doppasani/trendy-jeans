@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Star, MessageCircle, ShoppingBag, Ruler, X } from 'lucide-react';
+import { Star, MessageCircle, ShoppingBag, Ruler, X, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import { SIZE_GUIDE_DATA } from '../data/content';
 import { SHOP_NAME } from '../config/shop';
@@ -315,13 +315,13 @@ export default function Product(): React.ReactElement {
           </div>
 
           {/* Action buttons: Add to Cart & WhatsApp */}
-          <div className="flex flex-col gap-3 mb-8">
+          <div className="flex flex-col gap-3 mb-6">
             <Magnetic strength={0.25} radius={80}>
               <Button
                 ref={mainAddBtnRef}
                 variant="primary"
                 onClick={handleAddToCart}
-                className="w-full"
+                className="w-full text-base font-semibold"
               >
                 <ShoppingBag className="w-4 h-4 mr-2" />
                 Add to cart
@@ -337,11 +337,29 @@ export default function Product(): React.ReactElement {
               )}
               target="_blank"
               rel="noreferrer"
-              className="btn-secondary w-full text-center inline-flex items-center justify-center gap-2"
+              className="w-full h-[52px] rounded-full border-1.5 border-[#25D366]/70 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-ink font-semibold text-sm inline-flex items-center justify-center gap-2.5 transition-all shadow-xs cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-success" />
+              <MessageCircle className="w-5 h-5 text-[#25D366]" />
               <span>Order on WhatsApp</span>
             </a>
+
+            {/* Quick trust strip */}
+            <div className="mt-2 p-3.5 rounded-card bg-[#F8F6F1] border border-line flex items-center justify-between text-xs text-muted">
+              <span className="flex items-center gap-1.5">
+                <Truck className="w-3.5 h-3.5 text-gold" />
+                24–48h Dispatch
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <RotateCcw className="w-3.5 h-3.5 text-gold" />
+                7-Day Free Exchange
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                100% Genuine
+              </span>
+            </div>
           </div>
 
           {/* Accordion: Description, Fabric & Care, Delivery & Returns */}
