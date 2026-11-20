@@ -13,6 +13,7 @@ import { ProductCard } from '../components/ui/ProductCard';
 import { QuickAddModal } from '../components/ui/QuickAddModal';
 import { Button } from '../components/ui/Button';
 import { Magnetic } from '../components/cursor/Magnetic';
+import { HandControlled3DViewer } from '../components/ui/HandControlled3DViewer';
 import { useCart } from '../store/cart';
 import { useToast } from '../store/toast';
 import NotFound from './NotFound';
@@ -216,17 +217,12 @@ export default function Product(): React.ReactElement {
                 />
               </div>
             ) : (
-              <div className="relative aspect-square w-full rounded-card overflow-hidden bg-[#0B1220]/5 flex items-center justify-center">
-                <img
-                  src={product.animation3d}
-                  alt={`${product.name} 3D Animation`}
-                  className="w-full h-full object-cover object-center transition-all duration-300"
-                />
-                <div className="absolute top-3.5 right-3.5 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-ink border border-line shadow-xs flex items-center gap-1.5">
-                  <RotateCcw className="w-3.5 h-3.5 text-gold animate-spin" />
-                  <span>360° 3D Animation</span>
-                </div>
-              </div>
+              <HandControlled3DViewer
+                framesDir={product.framesDir}
+                name={product.name}
+                aspect="aspect-square"
+                dark={false}
+              />
             )}
           </div>
         </div>
